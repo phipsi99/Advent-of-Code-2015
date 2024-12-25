@@ -1,4 +1,5 @@
 from pathlib import Path
+import hashlib
 
 def do_main(debug_mode=False):
     with open(Path('04/input.txt')) as file:
@@ -11,7 +12,15 @@ def do_main(debug_mode=False):
     point_sum = 0
 
     for line_index, line in enumerate(lines):
-        r = [int(i) for i in line.split(" ")]
+        i = 0
+        while True:
+            i += 1
+            str2hash = line + str(i)
+            result = hashlib.md5(str2hash.encode())
+            if result.hexdigest().startswith("000000"):
+                print(i)
+                break
+            
 
 if __name__ == '__main__':
     do_main(False)
